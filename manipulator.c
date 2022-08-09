@@ -19,11 +19,12 @@ int manipulator(const char *str, va_list ap)
 			j = perman(str, ap, &i);
 			if (j == -1)
 				return (-1);
+
 			size += j;
 			continue;
 		}
 		_putchar(str[i]);
-		size += 1;
+		size = size + 1;
 	}
 
 	return (size);
@@ -52,7 +53,7 @@ int perman(const char *str, va_list ap, int *i)
 		return (1);
 	}
 
-	num = sizeof(format) / sizeof(formats[0]);
+	num = sizeof(formats) / sizeof(formats[0]);
 	for (size = j = 0; j < num; j++)
 	{
 		if (str[*i] == formats[j].type)
