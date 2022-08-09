@@ -41,7 +41,8 @@ int manipulator(const char *str, va_list ap)
 int perman(const char *str, va_list ap, int *i)
 {
 	int size, j, num;
-	format formats[] = {{'c', print_char}, {'s', print_str}};
+	format formats[] = {{'c', print_char}, {'s', print_str},
+		{'d', print_int}, {'i', print_int}, {0, NULL}};
 
 	*i = *i + 1;
 
