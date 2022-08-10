@@ -74,16 +74,20 @@ unsigned int convert_per(va_list args, buffer_t *output)
  */
 unsigned int convert_int(va_list args, buffer_t *output)
 {
-	long int d, copy;
+	int d, copy;
+	char *i;
 	unsigned int ret = 0, count = 0;
-	char space = ' ';
 
 	d = va_arg(args, int);
 
 	for (copy = (d < 0) ? -d : d; copy > 0; copy /= 10)
 		count++;
-	if (d >= 0)
-		ret += _memcpy(output, &space, 1);
+	count += (d == 0) ? 1 : 0;
+	count += (d < 0) ? 1 : 0;
+	count += (d >= 0) ? 1 : 0;
+
+	i = itoa(d, 10);
+	ret += _memcpy(output, i, count);
 
 	return (ret);
 }
