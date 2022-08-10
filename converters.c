@@ -85,6 +85,7 @@ unsigned int convert_int(va_list args, buffer_t *output)
 	count += (d == 0) ? 1 : 0;
 	count += (d < 0) ? 1 : 0;
 	count += (d >= 0) ? 1 : 0;
+	count += (d >= 0) ? 1 : 0;
 
 	i = itoa(d, 10);
 	ret += _memcpy(output, i, count);
