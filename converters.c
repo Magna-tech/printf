@@ -74,7 +74,7 @@ unsigned int convert_per(va_list args, buffer_t *output)
  */
 unsigned int convert_int(va_list args, buffer_t *output)
 {
-	int d, copy;
+	long int d, copy;
 	char *i;
 	unsigned int ret = 0, count = 0;
 
@@ -84,7 +84,6 @@ unsigned int convert_int(va_list args, buffer_t *output)
 		count++;
 	count += (d == 0) ? 1 : 0;
 	count += (d < 0) ? 1 : 0;
-	count += (d >= 0) ? 1 : 0;
 	count += (d >= 0) ? 1 : 0;
 
 	i = itoa(d, 10);
