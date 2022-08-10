@@ -1,70 +1,24 @@
 #include "main.h"
 
 /**
- * manipulator - controls formats
- * @str: a string format
- * @ap: list of args
+ * manipulator - matches conversion specifiers to functions
+ * @specifier: pointer to a conversion specifier
  *
- * Return: total number of arguments & size of base string
+ * Return: pointer to the function, NULL on failure
  */
-int manipulator(const char *str, va_list ap)
+unsigned int (*manipulator(const char *specifier))(va_list, buffer_t *)
 {
-	int size, i, j;
+	int i;
+	converter_t converters[] = {
+		{'c', convert_c}, {'s', convert_str},
+		{'d', convert_int}, {'i', convert_int},
+		{0, NULL}};
 
-	size = 0;
-	for (i = 0; str[i] != 0; i++)
+	for (i = 0; converters[i].func; i++)
 	{
-		if (str[i] == '%')
-		{
-			j = perman(str, ap, &i);
-			if (j == -1)
-				return (-1);
-
-			size += j;
-			continue;
-		}
-		_putchar(str[i]);
-		size = size + 1;
+		if (converters[i].specifier == *specifier)
+			return (converters[i].func);
 	}
 
-	return (size);
-}
-
-/**
- * perman - handles the percentage format
- * @str: format string
- * @ap: list of args
- * @i: iterator
- *
- * Return: size of the number of elements printed
- */
-int perman(const char *str, va_list ap, int *i)
-{
-	int size, j, num;
-	format formats[] = {{'c', print_char}, {'s', print_str},
-		{'d', print_int}, {'i', print_int}, {0, NULL}};
-
-	*i = *i + 1;
-
-	if (str[*i] == '\0')
-		return (-1);
-	if (str[*i] == '%')
-	{
-		_putchar('%');
-		return (1);
-	}
-
-	num = sizeof(formats) / sizeof(formats[0]);
-	for (size = j = 0; j < num; j++)
-	{
-		if (str[*i] == formats[j].type)
-		{
-			size = formats[j].f(ap);
-			return (size);
-		}
-	}
-	_putchar('%');
-	_putchar(str[*i]);
-
-	return (2);
+	return (NULL);
 }
