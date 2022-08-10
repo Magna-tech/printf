@@ -6,7 +6,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
- 
+
 /**
  * struct _format - typedef struct
  * @type: format
