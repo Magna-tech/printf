@@ -12,7 +12,7 @@ unsigned int (*manipulator(const char *specifier))(va_list, buffer_t *)
 	converter_t converters[] = {
 		{'c', convert_c}, {'s', convert_str},
 		{'d', convert_int}, {'i', convert_int},
-		{0, NULL}};
+		{'%', convert_per}, {0, NULL}};
 
 	for (i = 0; converters[i].func; i++)
 	{
